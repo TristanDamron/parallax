@@ -37,10 +37,11 @@ var colors = [];
 function setup() {
     createCanvas(800, 600, WEBGL);
 
-    for (var i = 0; i < 48; i++) {
+    for (var i = 0; i < 100; i++) {
         colors[i] = color (Math.floor(Math.random() * 255) + 1,
                            Math.floor(Math.random() * 255) + 1,
-                           Math.floor(Math.random() * 255) + 1);
+                           Math.floor(Math.random() * 255) + 1, 
+                           80);
     }
 }
 
@@ -59,25 +60,20 @@ function draw() {
 
     var colorIndex = 0;
 
-    for (var row = 0; row < 8; row++) {
-        for (var col = 0; col < 6; col++) {    
+    for (var row = 0; row < 10; row++) {
+        for (var col = 0; col < 10; col++) {    
             push();              
             fill(colors[colorIndex]);
             // noStroke();
 
-            if (left && right) { 
-                
-                // Left side
-                if (-350 + (row * 100) < 0) {
-                    translate((leftCenter[0] - left[0]) + -350 + (row * 100), (leftCenter[1] - left[1]) + -250 + (col * 100));                                                                                         
-                } else {
-                    // right side                    
-                    translate((rightCenter[0] - right[0]) + -350 + (row * 100), (rightCenter[1] - right[1]) + -250 + (col * 100));                                                                                                             
-                }                
+            if (left && right) {                 
+                rect((leftCenter[0] - left[0]) + -450 + ((row * 150)), (leftCenter[1] - left[1]) + -350 + (col * 150), 100, 100);                                                                                         
+                scale(0.9, 0.9);                            
+                rect((rightCenter[0] - right[0]) + -450 + ((row * 150)), (rightCenter[1] - right[1]) + -350 + (col * 150), 100, 100);                                                                                                                             
             }
 
-            scale(0.5, 0.5, 3);        
-            box(100);            
+            
+            
             pop();          
 
             colorIndex++;            
