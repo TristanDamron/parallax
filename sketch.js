@@ -33,11 +33,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 var colors = [];
+var slider;
 
 function setup() {
     createCanvas(800, 600, WEBGL);
 
-    for (var i = 0; i < 100; i++) {
+    slider = createSlider(0, 50, 10);
+    slider.position(width / 2, 0);
+    slider.style('width', '400px');
+
+    for (var i = 0; i < 48; i++) {
         colors[i] = color (Math.floor(Math.random() * 255) + 1,
                            Math.floor(Math.random() * 255) + 1,
                            Math.floor(Math.random() * 255) + 1, 
@@ -57,26 +62,19 @@ function draw() {
     background(0);    
 
     rectMode(CENTER);
+    
+    push();              
+    fill(colors[0]);
+    noStroke();
+    translate(0, 0);
 
-    var colorIndex = 0;
-
-    for (var row = 0; row < 10; row++) {
-        for (var col = 0; col < 10; col++) {    
-            push();              
-            fill(colors[colorIndex]);
-            // noStroke();
-
-            if (left && right) {                 
-                rect((leftCenter[0] - left[0]) + -450 + ((row * 150)), (leftCenter[1] - left[1]) + -350 + (col * 150), 100, 100);                                                                                         
-                scale(0.9, 0.9);                            
-                rect((rightCenter[0] - right[0]) + -450 + ((row * 150)), (rightCenter[1] - right[1]) + -350 + (col * 150), 100, 100);                                                                                                                             
-            }
-
-            
-            
-            pop();          
-
-            colorIndex++;            
+    if (left && right) {                 
+        for (var i = 1; i < slider.value(); i++) {
+            scale(1 - (0.01 * i));                    
+            rect((leftCenter[0] - left[0]), (leftCenter[1] - left[1]), 100, 100);                                                                                                                                 
         }
     }
+
+    pop();          
+
 }
