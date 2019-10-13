@@ -36,10 +36,10 @@ var colors = [];
 var slider;
 
 function setup() {
-    createCanvas(800, 600, WEBGL);
+    createCanvas(windowWidth, windowHeight, WEBGL);
 
     slider = createSlider(0, 50, 10);
-    slider.position(width / 2, 0);
+    slider.position((windowWidth / 2) - 200, 0);
     slider.style('width', '400px');
 
     for (var i = 0; i < 48; i++) {
@@ -71,7 +71,7 @@ function draw() {
     if (left && right) {                 
         for (var i = 1; i < slider.value(); i++) {
             scale(1 - (0.01 * i));                    
-            rect((leftCenter[0] - left[0]), (leftCenter[1] - left[1]), 100, 100);                                                                                                                                 
+            rect((leftCenter[0] - left[0]) + (rightCenter[0] - right[0]) - 50, -((leftCenter[1] - left[1]) + (rightCenter[1] - right[1])) + 50, 100, 100);                                                                                                                                 
         }
     }
 
